@@ -14,7 +14,7 @@ Pagination and filtering helper method for TypeORM repositories or query builder
 - Sort by multiple columns
 - Search across columns
 - Select columns
-- Filter using operators (`$eq`, `$not`, `$null`, `$in`, `$gt`, `$gte`, `$lt`, `$lte`, `$btw`, `$ilike`, `$sw`, `$contains`)
+- Filter using operators (`$eq`, `$not`, `$null`, `$in`, `$gt`, `$gte`, `$lt`, `$lte`, `$btw`, `$ilike`, `$sw`, `$ew`, `$contains`)
 - Include relations and nested relations
 - Virtual column support
 
@@ -437,6 +437,8 @@ const config: PaginateConfig<CatEntity> = {
 `?filter.summary=$not:$ilike:term` where column `summary` does **not** contain `term`
 
 `?filter.summary=$sw:term` where column `summary` starts with `term`
+
+`?filter.summary=$ew:term` where column `summary` ends with `term`
 
 `?filter.seenAt=$null` where column `seenAt` is `NULL`
 

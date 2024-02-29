@@ -37,6 +37,7 @@ export enum FilterOperator {
     BTW = '$btw',
     ILIKE = '$ilike',
     SW = '$sw',
+    EW = '$ew',
     CONTAINS = '$contains',
 }
 
@@ -76,6 +77,7 @@ export const OperatorSymbolToFunction = new Map<
     [FilterOperator.ILIKE, ILike],
     [FilterSuffix.NOT, Not],
     [FilterOperator.SW, ILike],
+    [FilterOperator.EW, ILike],
     [FilterOperator.CONTAINS, ArrayContains],
 ])
 
@@ -288,6 +290,9 @@ export function parseFilter(
                     break
                 case FilterOperator.SW:
                     params.findOperator = OperatorSymbolToFunction.get(token.operator)(`${token.value}%`)
+                    break
+                case FilterOperator.EW:
+                    params.findOperator = OperatorSymbolToFunction.get(token.operator)(`%${token.value}`)
                     break
                 default:
                     params.findOperator = OperatorSymbolToFunction.get(token.operator)(fixValue(token.value))
